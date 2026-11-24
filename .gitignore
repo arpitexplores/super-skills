@@ -1,0 +1,8 @@
+# Local operating system and Python artefacts
+.DS_Store
+__pycache__/
+*.pyc
+# Local credentials and scratch files (never included in a release)
+.env
+.env.*
+.local/

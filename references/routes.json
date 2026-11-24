@@ -1,0 +1,624 @@
+{
+  "schema_version": 2,
+  "catalogue_name": "Super Skills",
+  "authority": "Complete workflow files in this versioned public package.",
+  "source_catalogue": "CATALOGUE.md",
+  "prompts": [
+    {
+      "id": "1.1",
+      "title": "Client Discovery & Project Scoping Prompt",
+      "intent": "Qualify prospective work, understand the client's underlying problem and users, establish scope, constraints, risks and feasibility, and prepare an evidence-based discovery brief. No premature solution or price commitments.",
+      "file": "prompts/01-client-engagement-commercial/1.1-client-discovery-and-project-scoping.md",
+      "git_blob_sha": "47e85de63efcf5650e85dcab3d179f8be36e8692",
+      "optional_external_sources": [
+        "R008"
+      ]
+    },
+    {
+      "id": "1.2",
+      "title": "Project Proposal, Estimation & Statement of Work Prompt",
+      "intent": "Prepare or review clear deliverables, exclusions, estimates, commercial options, milestones, acceptance criteria, third-party costs and scope changes. Works without prior discovery.",
+      "file": "prompts/01-client-engagement-commercial/1.2-project-proposal-estimation-and-statement-of-work.md",
+      "git_blob_sha": "5c8b460a2902c16345436cc4fe7898f38fcb915c",
+      "optional_external_sources": [
+        "R008"
+      ]
+    },
+    {
+      "id": "1.3",
+      "title": "Client Contract & Agreement Drafting Prompt",
+      "intent": "Draft and review jurisdiction-aware service agreements, NDAs, amendments and terms for fees, IP, liability, privacy, termination and handover. Clearly flags unagreed terms and legal review; never claims execution.",
+      "file": "prompts/01-client-engagement-commercial/1.3-client-contract-and-agreement-drafting.md",
+      "git_blob_sha": "927ed4720bd830d821799e7d7996d4df48da79f6",
+      "optional_external_sources": []
+    },
+    {
+      "id": "1.4",
+      "title": "Client Onboarding & Project Kickoff Prompt",
+      "intent": "Prepare onboarding, client responsibilities, secure access and asset requests, kickoff agendas, working arrangements and initial project readiness. Doesn't require another prompt or authorise account changes.",
+      "file": "prompts/01-client-engagement-commercial/1.4-client-onboarding-and-project-kickoff.md",
+      "git_blob_sha": "547e7f8a5ae89403898428e070ea1ca0ba6438f5",
+      "optional_external_sources": [
+        "R031"
+      ]
+    },
+    {
+      "id": "1.5",
+      "title": "Project Delivery & Change Management Prompt",
+      "intent": "Manage milestones, task progress, risks, client communications, feedback, scope changes, approvals and project transition against the agreed baseline. Separates change requests from accepted scope and implementation.",
+      "file": "prompts/01-client-engagement-commercial/1.5-project-delivery-and-change-management.md",
+      "git_blob_sha": "ae6a19a1a8342e06944da60094276f65a4f3c8f7",
+      "optional_external_sources": [
+        "R021",
+        "R031"
+      ]
+    },
+    {
+      "id": "2.1",
+      "title": "AI Product Development Prompt",
+      "intent": "Define product foundations, architecture, technical acceptance, security and safe releases. Audit six documentation functions across existing authoritative sources, check them against code and tests, and verify continuity for a fresh AI assistant session without requiring six separate files.",
+      "file": "prompts/02-product-planning-architecture/2.1-ai-product-development.md",
+      "git_blob_sha": "d456256b508a6d85d1de36d8b6017765cb54f202",
+      "optional_external_sources": [
+        "R003",
+        "R021",
+        "R028"
+      ]
+    },
+    {
+      "id": "2.2",
+      "title": "Product Discovery, Market Validation & Monetisation Strategy Prompt",
+      "intent": "Assess new or existing SaaS and digital product opportunities through real customer evidence, market alternatives, small validation tests, willingness to pay, pricing, packaging and unit economics. Recommend whether to proceed, refine, test or stop.",
+      "file": "prompts/02-product-planning-architecture/2.2-product-discovery-market-validation-and-monetisation-strategy.md",
+      "git_blob_sha": "ea8431a7ecb9defd2733ff10f05ad428a342df65",
+      "optional_external_sources": [
+        "R008"
+      ]
+    },
+    {
+      "id": "2.3",
+      "title": "Product Analytics, User Activation & Retention Optimisation Prompt",
+      "intent": "Define trustworthy product events and metrics, measure first value, feature use and retention across user or account cohorts, diagnose churn and test improvements. Works for new or existing SaaS and other digital products without imposing a vendor.",
+      "file": "prompts/02-product-planning-architecture/2.3-product-analytics-user-activation-and-retention-optimisation.md",
+      "git_blob_sha": "10b7221dc2eef676ee0c6f35fbcf57aca0aa8c00",
+      "optional_external_sources": [
+        "R008",
+        "R031"
+      ]
+    },
+    {
+      "id": "3.1",
+      "title": "UI, UX & Design Engineering Prompt",
+      "intent": "Design and implement consistent, accessible website and app interfaces with reusable components. Check responsive menus, logo-home and clickable phone/email links, useful states, visual alignment and real journeys against approved designs. Reject technically valid but visually poor outcomes; unassessed mandatory criteria cannot pass.",
+      "file": "prompts/03-ui-ux-design/3.1-ui-ux-and-design-engineering.md",
+      "git_blob_sha": "88d83663a97fbb7beb4ce993fac0db79f9ed3925",
+      "optional_external_sources": [
+        "R001",
+        "R025",
+        "R030",
+        "R002",
+        "R003"
+      ]
+    },
+    {
+      "id": "3.2",
+      "title": "Visual Preference Discovery & Design System Creation Prompt",
+      "intent": "Analyse supplied visual references to clarify preferred styles, establish coherent design direction, choose only free UI foundations licensed for the intended use, and create reusable tokens, component contracts and alignment rules. Includes specimen and actual rendering checks, without requiring 3.1 first.",
+      "file": "prompts/03-ui-ux-design/3.2-visual-preference-discovery-and-design-system-creation.md",
+      "git_blob_sha": "11f0ada01772063c4ab68a6bad6bcc9bb436e6e8",
+      "optional_external_sources": [
+        "R001",
+        "R016",
+        "R025",
+        "R030"
+      ]
+    },
+    {
+      "id": "4.1",
+      "title": "AI Agent Engineering Prompt",
+      "intent": "Design or review agents, permissions, state, tools, safeguards, evaluations and recoverable execution. Trace consequential actions and approvals with appropriate diagnostics or audit history.",
+      "file": "prompts/04-engineering-ai-agents/4.1-ai-agent-engineering.md",
+      "git_blob_sha": "73d4ca521b37f09abe7c795832cdbf030f0dde10",
+      "optional_external_sources": [
+        "R028",
+        "R021",
+        "R026"
+      ]
+    },
+    {
+      "id": "4.2",
+      "title": "Security & Authentication Engineering Prompt",
+      "intent": "Assess authentication, salted adaptive password hashes, expiring resets, sessions, admin and tenant access, secrets and Git-history leaks. Verify relevant security controls, activity logs, third-party SDK consent and data rights.",
+      "file": "prompts/04-engineering-ai-agents/4.2-security-and-authentication-engineering.md",
+      "git_blob_sha": "3f58847d9b2e71a36b0e0a09122267b5591c0d6c",
+      "optional_external_sources": [
+        "R005",
+        "R028",
+        "R021"
+      ]
+    },
+    {
+      "id": "4.3",
+      "title": "Backend, Database & API Integration Engineering Prompt",
+      "intent": "Implement and verify backend data, APIs, migrations, jobs and integrations, including server-side form validation, parameterised queries and safe file uploads. Scope traceable errors and attributable admin or business history as needed.",
+      "file": "prompts/04-engineering-ai-agents/4.3-backend-database-and-api-integration-engineering.md",
+      "git_blob_sha": "449cdc17ee48bf48cfd363aff07a1b8e928572ce",
+      "optional_external_sources": [
+        "R003",
+        "R028",
+        "R031"
+      ]
+    },
+    {
+      "id": "4.4",
+      "title": "Payments, Subscription Billing & Digital Product Fulfilment Engineering Prompt",
+      "intent": "Implement checkout, subscriptions, refunds, digital fulfilment and entitlements with verified provider events, recovery and attributable financial or access changes.",
+      "file": "prompts/04-engineering-ai-agents/4.4-payments-subscription-billing-and-digital-product-fulfilment-engineering.md",
+      "git_blob_sha": "7eb58cfa740f4396fbb2a48a78e984df6b4f113f",
+      "optional_external_sources": [
+        "R028",
+        "R021"
+      ]
+    },
+    {
+      "id": "4.5",
+      "title": "Full-Stack Feature Development & Refactoring Prompt",
+      "intent": "Own full-stack SaaS feature implementation and refactoring across application layers, contracts, migrations, UI state, integrated tests and acceptance.",
+      "file": "prompts/04-engineering-ai-agents/4.5-full-stack-feature-development-and-refactoring.md",
+      "git_blob_sha": "616b8f1fff8511140c8a88390b7249c6074265fb",
+      "optional_external_sources": [
+        "R003",
+        "R028",
+        "R021"
+      ]
+    },
+    {
+      "id": "4.6",
+      "title": "AI Application, RAG & Model Integration Engineering Prompt",
+      "intent": "Own non-agent AI application engineering, RAG and model integrations, including embeddings, chunking, retrieval evaluation, grounding, model routing, prompt versions, safety and reliability.",
+      "file": "prompts/04-engineering-ai-agents/4.6-ai-application-rag-and-model-integration-engineering.md",
+      "git_blob_sha": "a2a23964a5c053663f4309228b03dc8058fa406c",
+      "optional_external_sources": [
+        "R028",
+        "R026"
+      ]
+    },
+    {
+      "id": "4.7",
+      "title": "Data Engineering, Analytics Pipelines & BI Prompt",
+      "intent": "Own data engineering and analytics pipelines, including source ingestion, ETL/ELT, warehouse models, data quality, reproducible analysis, BI and statistical engineering.",
+      "file": "prompts/04-engineering-ai-agents/4.7-data-engineering-analytics-pipelines-and-bi.md",
+      "git_blob_sha": "712490e4bfaf28e5ed67f90a63b197747f340370",
+      "optional_external_sources": [
+        "R028",
+        "R031"
+      ]
+    },
+    {
+      "id": "4.8",
+      "title": "LLM Evaluation, Quality & AI Operations Prompt",
+      "intent": "Own independent LLM evaluation, AI quality and operations, including evaluation datasets, judge bias, grounding metrics, regression tests, telemetry, rollbacks and incident analysis.",
+      "file": "prompts/04-engineering-ai-agents/4.8-llm-evaluation-quality-and-ai-operations.md",
+      "git_blob_sha": "a507c37dc3def0e4a8fa275962f2ce23081dab04",
+      "optional_external_sources": [
+        "R021",
+        "R028"
+      ]
+    },
+    {
+      "id": "5.1",
+      "title": "Project Testing and Quality Assurance Prompt",
+      "intent": "Test app and website functionality, security, scalability and independent design or editorial acceptance. Verify applicable page routes and templates, navigation/footer links, buttons, form states, placeholder copy, mobile menus, overflow and image quality. Report untested pages and failed mandatory criteria, never assume a pass.",
+      "file": "prompts/05-testing-quality-assurance/5.1-project-testing-and-quality-assurance.md",
+      "git_blob_sha": "a5f1ba0acc724acfb92a87d7af904f7da131b3dc",
+      "optional_external_sources": [
+        "R002",
+        "R021",
+        "R025",
+        "R030"
+      ]
+    },
+    {
+      "id": "6.1",
+      "title": "Content and Documentation Governance Prompt",
+      "intent": "Establish reusable content foundations for voice, messaging, writing patterns and SEO. AI self-review checks outputs against independently defined editorial criteria and must reject unnatural yet technically valid copy. External validators remain optional.",
+      "file": "prompts/06-content-documentation/6.1-content-and-documentation-governance.md",
+      "git_blob_sha": "9a00ef1c443705a4b6c44a9b6300bbaae050ce47",
+      "optional_external_sources": [
+        "R008",
+        "R020"
+      ]
+    },
+    {
+      "id": "6.2",
+      "title": "Transactional & Marketing Email Communications, Compliance & Lifecycle Engineering Prompt",
+      "intent": "Classify and govern transactional, security, service and marketing emails. Verify recipient-specific legal requirements, consent, unsubscribes, accessible templates, delivery and tests while protecting essential notices.",
+      "file": "prompts/06-content-documentation/6.2-transactional-and-marketing-email-communications-compliance-and-lifecycle-engineering.md",
+      "git_blob_sha": "07961c58a3bab1ae7ab7d0ca6d3d0a43e2893911",
+      "optional_external_sources": [
+        "R008",
+        "R031"
+      ]
+    },
+    {
+      "id": "7.1",
+      "title": "SEO and AEO Audit Prompt",
+      "intent": "Audit SEO and multi-platform AEO without editing the site. Require accurate llms.txt, useful purpose-built FAQs with matching FAQPage schema and keyword-density checks. Verify crawler access, server and rendered HTML, AI visibility reports, prioritised business value and safe preview handling. Includes Search Console query and backlink evidence.",
+      "file": "prompts/07-seo-search-visibility/7.1-seo-and-aeo-audit.md",
+      "git_blob_sha": "42b894f89cd92ef39879bfebac130d634da62f87",
+      "optional_external_sources": [
+        "R029",
+        "R002",
+        "R008"
+      ]
+    },
+    {
+      "id": "7.2",
+      "title": "SEO and AEO Implementation Prompt",
+      "intent": "Implement authorised SEO/AEO improvements for multiple search and AI systems. Maintain required llms.txt, purposeful FAQ coverage and matching FAQPage schema, and keyword-density checks. Verify crawler access, initial and rendered HTML, approved fixes, AI visibility reporting, accessibility and safe staging controls. Material new content and live external actions still need approval. Includes a useful accessible 404 page with the correc",
+      "file": "prompts/07-seo-search-visibility/7.2-seo-and-aeo-implementation.md",
+      "git_blob_sha": "392238ee1e33fb290baad2e218ba81b5c05228dd",
+      "optional_external_sources": [
+        "R029",
+        "R003",
+        "R008"
+      ]
+    },
+    {
+      "id": "8.1",
+      "title": "Reddit Growth, Research & Community Engagement Prompt",
+      "intent": "Use with any brand to assess Reddit fit, discover and monitor communities, improve profiles, identify opportunities, prepare useful comments and posts, manage reputation, capture customer insights and measure results. Existing brand and project standards take precedence; external actions require approval.",
+      "file": "prompts/08-marketing-growth/8.1-reddit-growth-research-and-community-engagement.md",
+      "git_blob_sha": "a2a1d2930bde709b663e7a5d79b915983ed07578",
+      "optional_external_sources": [
+        "R020",
+        "R008",
+        "R019"
+      ]
+    },
+    {
+      "id": "8.2",
+      "title": "Reddit Paid Advertising & Campaign Optimisation Prompt",
+      "intent": "Use independently to assess paid Reddit suitability, plan audiences and creative, verify policy and privacy requirements, prepare measurement and controlled tests, execute authorised campaigns and optimise actual performance. No spend or external account changes without approval.",
+      "file": "prompts/08-marketing-growth/8.2-reddit-paid-advertising-and-campaign-optimisation.md",
+      "git_blob_sha": "6dcb0a5967de73b747b7dde16798629659815830",
+      "optional_external_sources": [
+        "R008"
+      ]
+    },
+    {
+      "id": "8.3",
+      "title": "UGC Ad Strategy, Concepts & Scripts Prompt",
+      "intent": "Develop UGC advertising strategy, distinct visual and spoken hooks, format choices, audience-relevant proof, memorable brand differentiation, scripts and creative tests linked to business outcomes. Works with human creators, synthetic presenters or hybrid production.",
+      "file": "prompts/08-marketing-growth/8.3-ugc-ad-strategy-concepts-and-scripts.md",
+      "git_blob_sha": "62c12fb45d508600b76f3e92515eee7be7890268",
+      "optional_external_sources": [
+        "R008",
+        "R018",
+        "R013",
+        "R020"
+      ]
+    },
+    {
+      "id": "8.4",
+      "title": "AI UGC Ad Production & Quality Control Prompt",
+      "intent": "Produce and verify UGC video using genuine footage, AI or hybrid methods chosen for credibility, fidelity and overall production effort. Covers product and creator references, physical interactions, claim-critical shot reviews, final export accessibility, cost-aware repairs, rights and disclosures.",
+      "file": "prompts/08-marketing-growth/8.4-ai-ugc-ad-production-and-quality-control.md",
+      "git_blob_sha": "993c6c87ba6e470784a480cbaa46493ca42ff3c1",
+      "optional_external_sources": [
+        "R013",
+        "R014",
+        "R023",
+        "R022",
+        "R026"
+      ]
+    },
+    {
+      "id": "8.5",
+      "title": "AI Brand Image Generation & Quality Control Prompt",
+      "intent": "Create and review reference-faithful brand images. Inspect actual composition, camera, anatomy, objects, text and crop, not metadata alone; ensure QA rejects plausible but visually wrong examples. Failed or unassessed mandatory criteria cannot pass. Includes a worked example.",
+      "file": "prompts/08-marketing-growth/8.5-ai-brand-image-generation-and-quality-control.md",
+      "git_blob_sha": "cd4fe8906ffbfeab0c53489c014856a201b20c43",
+      "optional_external_sources": [
+        "R018",
+        "R026",
+        "R016",
+        "R020",
+        "R015"
+      ]
+    },
+    {
+      "id": "8.6",
+      "title": "Personal & Business Positioning and Messaging Strategy Prompt",
+      "intent": "Develop evidence-based personal, business or combined positioning, brand voice, audiences and content themes. Includes a LinkedIn company tagline workflow with varied structures, evidence-backed claims, audience language and the 120-character limit. Independent and cross-platform. Also covers canonical links in social biographies and accurate eligible local business listings.",
+      "file": "prompts/08-marketing-growth/8.6-personal-and-business-positioning-and-messaging-strategy.md",
+      "git_blob_sha": "c7a1bc2094eb0924053672392bdfeffba8e9c4a0",
+      "optional_external_sources": [
+        "R008",
+        "R020"
+      ]
+    },
+    {
+      "id": "8.7",
+      "title": "LinkedIn Personal Profile Post Writing Prompt",
+      "intent": "Draft, rewrite and repurpose personal LinkedIn posts with a distinctive voice, real or clearly framed creative stories, audience-relevant hooks, approximate mobile and desktop feed-preview checks, and goal-led engagement or follower growth.",
+      "file": "prompts/08-marketing-growth/8.7-linkedin-personal-profile-post-writing.md",
+      "git_blob_sha": "d09c37bb23a7b84ac68729bb6eb489789a5dec24",
+      "optional_external_sources": [
+        "R020",
+        "R008",
+        "R019"
+      ]
+    },
+    {
+      "id": "8.8",
+      "title": "LinkedIn Company Page Post Writing Prompt",
+      "intent": "Create company LinkedIn posts with practical customer insight, verified proof, relevant formats, decision-useful content, genuine sharing value and goal-matched calls to action. Check visible feed hooks and use approved page positioning without repeating it mechanically.",
+      "file": "prompts/08-marketing-growth/8.8-linkedin-company-page-post-writing.md",
+      "git_blob_sha": "5ef3b09ec13dc9861baf6f9d245fabe2311e4f87",
+      "optional_external_sources": [
+        "R020",
+        "R008",
+        "R019"
+      ]
+    },
+    {
+      "id": "8.9",
+      "title": "Content Performance Analysis & Optimisation Prompt",
+      "intent": "Analyse personal and business content results across platforms with verified measurement, fair comparisons, audience response quality, indirect commercial signals and clear decisions on what to repeat, adapt or stop.",
+      "file": "prompts/08-marketing-growth/8.9-content-performance-analysis-and-optimisation.md",
+      "git_blob_sha": "4d3a4d95f99fb69d2d5efc45611911f6e2ddb22f",
+      "optional_external_sources": [
+        "R020",
+        "R008",
+        "R019"
+      ]
+    },
+    {
+      "id": "8.10",
+      "title": "Audience Journey & Sales Funnel Strategy Prompt",
+      "intent": "Choose a credible conversion journey for the audience and offer, including pilot validation, direct or nurtured routes, buyer and participant roles, parallel delivery planning, and outcomes beyond lead volume.",
+      "file": "prompts/08-marketing-growth/8.10-audience-journey-and-sales-funnel-strategy.md",
+      "git_blob_sha": "8305496114facc8eef8fd55f346dc34b1bfd2edb",
+      "optional_external_sources": [
+        "R008"
+      ]
+    },
+    {
+      "id": "8.11",
+      "title": "High-Converting Webinar Strategy, Outline & Script Creation Prompt",
+      "intent": "Create brand-specific webinars with a timed teaching outline, credible proof, ethical offer transition, presenter script options, Q&A, registration and follow-up.",
+      "file": "prompts/08-marketing-growth/8.11-high-converting-webinar-strategy-outline-and-script-creation.md",
+      "git_blob_sha": "d4a3902ff3f0cefe0453aa8d9737634d6d2e3069",
+      "optional_external_sources": [
+        "R008"
+      ]
+    },
+    {
+      "id": "8.12",
+      "title": "Lead Magnet Strategy, Creation & Conversion Optimisation Prompt",
+      "intent": "Create or improve brand-specific lead magnets by validating audience problems, producing a complete narrow solution, selecting suitable formats and gates, preparing ethical delivery and follow-up, and evaluating qualified leads.",
+      "file": "prompts/08-marketing-growth/8.12-lead-magnet-strategy-creation-and-conversion-optimisation.md",
+      "git_blob_sha": "5b4af9366f96db296f13164969cdd60c1be97458",
+      "optional_external_sources": [
+        "R008"
+      ]
+    },
+    {
+      "id": "8.13",
+      "title": "Landing Page Strategy, Copywriting, Design & Conversion Optimisation Prompt",
+      "intent": "Create, implement, audit and optimise brand-specific landing pages with clear promises, credible proof, persuasive copy, genuine guarantees and deadlines, mobile accessibility, functioning conversion paths and measured results.",
+      "file": "prompts/08-marketing-growth/8.13-landing-page-strategy-copywriting-design-and-conversion-optimisation.md",
+      "git_blob_sha": "b22dfb365d1149b2e3eae4af116140cf70886b43",
+      "optional_external_sources": [
+        "R008",
+        "R025",
+        "R030",
+        "R002"
+      ]
+    },
+    {
+      "id": "8.14",
+      "title": "Website Blog & Article Research, Writing & Optimisation Prompt",
+      "intent": "Research, write, fact-check and improve complete website articles using reader questions, original expertise, natural search optimisation, clear structure, useful links and appropriate next steps.",
+      "file": "prompts/08-marketing-growth/8.14-website-blog-and-article-research-writing-and-optimisation.md",
+      "git_blob_sha": "5b02fa7f59ac254faa3863a81569e9f13ad5b797",
+      "optional_external_sources": [
+        "R008",
+        "R029"
+      ]
+    },
+    {
+      "id": "8.15",
+      "title": "Medium Article Strategy, Writing & Distribution Prompt",
+      "intent": "Research, write and refine Medium stories for real readers, with compelling openings, authentic voice, useful insights, previews, relevant topics, publication submissions, distribution and canonical-aware republishing.",
+      "file": "prompts/08-marketing-growth/8.15-medium-article-strategy-writing-and-distribution.md",
+      "git_blob_sha": "674801629b2635a2f41c829eb6d72e8dac6dd628",
+      "optional_external_sources": [
+        "R020",
+        "R008"
+      ]
+    },
+    {
+      "id": "8.16",
+      "title": "Cross-Channel Content Opportunity Research Prompt",
+      "intent": "Discover evidence-backed audience questions, real problems, underserved topics and distinct content opportunities reusable across platforms, without duplicating positioning, performance analysis or finished post writing.",
+      "file": "prompts/08-marketing-growth/8.16-cross-channel-content-opportunity-research.md",
+      "git_blob_sha": "9645d10f69f5195efa8fc256637efd15084008e1",
+      "optional_external_sources": [
+        "R008",
+        "R020"
+      ]
+    },
+    {
+      "id": "8.17",
+      "title": "Complete Website Content Strategy, Research & Copywriting Prompt",
+      "intent": "Research, plan, write, audit and improve complete core website content across home, About, services, features, pricing, FAQ and other needed pages. Includes keyword and intent mapping, page structure, natural SEO, approved FAQ and llms.txt planning, internal links and independent editorial QA. Independently usable for new or existing sites.",
+      "file": "prompts/08-marketing-growth/8.17-complete-website-content-strategy-research-and-copywriting.md",
+      "git_blob_sha": "2e1ec5f901c666dd960757d3cd435003f5d6d3aa",
+      "optional_external_sources": [
+        "R008",
+        "R029",
+        "R025"
+      ]
+    },
+    {
+      "id": "8.18",
+      "title": "Complete Marketing Strategy, Go-to-Market Planning & Execution Roadmap Prompt",
+      "intent": "Independently plan complete marketing and go-to-market activity across customer research, channel choices, offers, budgets, customer lifecycle, measurement and a feasible execution roadmap. Reuses approved context without fixed documentation or forced channels.",
+      "file": "prompts/08-marketing-growth/8.18-complete-marketing-strategy-go-to-market-planning-and-execution-roadmap.md",
+      "git_blob_sha": "66173fc0ce3d8d72bcee908fdbad76b2190c30ef",
+      "optional_external_sources": [
+        "R008",
+        "R020",
+        "R031"
+      ]
+    },
+    {
+      "id": "8.19",
+      "title": "Multi-Platform Paid Advertising Strategy, Operations & Measurement Prompt",
+      "intent": "Independently assess, audit, plan, implement when authorised and optimise Google, Meta, LinkedIn and other applicable paid campaigns. Verifies suitability, platform rules, consent, conversion quality, budgets and actual account evidence; Reddit specialist 8.2 remains separate.",
+      "file": "prompts/08-marketing-growth/8.19-multi-platform-paid-advertising-strategy-operations-and-measurement.md",
+      "git_blob_sha": "0ee8ce1c728d429e150bf6b33884814259a04006",
+      "optional_external_sources": [
+        "R008"
+      ]
+    },
+    {
+      "id": "8.20",
+      "title": "Cross-Platform Social Content & Repurposing Prompt",
+      "intent": "Own cross-platform organic social content, including Instagram, TikTok, Facebook, X and YouTube Shorts copy, channel-specific repurposing and editorial calendars, outside dedicated LinkedIn and Reddit prompts.",
+      "file": "prompts/08-marketing-growth/8.20-cross-platform-social-content-and-repurposing.md",
+      "git_blob_sha": "80fe1f94dd7f5dedb9605001cc454cdaed943495",
+      "optional_external_sources": [
+        "R020",
+        "R008"
+      ]
+    },
+    {
+      "id": "8.21",
+      "title": "Social Publishing & Distribution Operations Prompt",
+      "intent": "Own approved cross-platform social publishing and distribution operations, including connected publishing queues, calendars, approval, post status, duplicate prevention and platform monitoring.",
+      "file": "prompts/08-marketing-growth/8.21-social-publishing-and-distribution-operations.md",
+      "git_blob_sha": "c617917a9f75f41de12fc2303df56f0762c6d828",
+      "optional_external_sources": [
+        "R019",
+        "R020",
+        "R008"
+      ]
+    },
+    {
+      "id": "9.1",
+      "title": "Production Launch Readiness & Deployment Prompt",
+      "intent": "Review release readiness across security, recovery, SEO, performance, integrations and monitoring. Before authorised website launches, verify metadata, favicon, copyright, placeholders, contact/footer links, buttons, responsive navigation, image optimisation, forms and recovery states. Deploy only with approval and verify actual live outcomes.",
+      "file": "prompts/09-deployment-client-handover/9.1-production-launch-readiness-and-deployment.md",
+      "git_blob_sha": "8d8b530354dc8c9c20cf53a32b1f41f3d9846674",
+      "optional_external_sources": [
+        "R021",
+        "R002",
+        "R003",
+        "R005",
+        "R029"
+      ]
+    },
+    {
+      "id": "9.2",
+      "title": "Client Handover & Operational Readiness Prompt",
+      "intent": "Audit and complete client ownership and handover of service accounts, access, recovery, billing, assets, data, operations, support, documentation and training. Requires distinct client acceptance with evidence; no automatic transfers or account changes. Adds public policy ownership, customer data rights and production font, image and asset licence evidence.",
+      "file": "prompts/09-deployment-client-handover/9.2-client-handover-and-operational-readiness.md",
+      "git_blob_sha": "7f8f014c1b363ccd95253803a10a919847597ce6",
+      "optional_external_sources": [
+        "R021",
+        "R031"
+      ]
+    },
+    {
+      "id": "9.3",
+      "title": "Website Domain, DNS & Email Architecture Strategy Prompt",
+      "intent": "Plan, audit and implement website domains, DNS, sender authentication and email architecture for business sites, ecommerce and applications. Covers canonical hostnames, transactional and marketing separation, SPF, DKIM, DMARC, consent, provider choice, safe changes and verification.",
+      "file": "prompts/09-deployment-client-handover/9.3-website-domain-dns-and-email-architecture-strategy.md",
+      "git_blob_sha": "4eae00b56deebf4381aab2fcf9bbfad36e85bac7",
+      "optional_external_sources": [
+        "R005",
+        "R003"
+      ]
+    },
+    {
+      "id": "9.4",
+      "title": "Cloud Infrastructure & DevOps Engineering Prompt",
+      "intent": "Cloud infrastructure, CI/CD and infrastructure-as-code delivery. Standalone infrastructure provisioning, environment architecture, repeatable IaC, access review and cloud migration are split across narrower owners",
+      "file": "prompts/09-deployment-client-handover/9.4-cloud-infrastructure-and-devops-engineering.md",
+      "git_blob_sha": "ccdd3b6b166216a94ef2dd1982558a7abd838f21",
+      "optional_external_sources": [
+        "R005",
+        "R028",
+        "R003"
+      ]
+    },
+    {
+      "id": "10.1",
+      "title": "Resource Efficiency and Cost Optimisation Prompt",
+      "intent": "Use before development, during implementation or on an existing app to compare suitable database engines and providers, model idle and growth costs, assess migration total cost and optimise infrastructure usage. Covers compute, queries, storage, development environments, hosting and approved repairs without requiring a companion prompt.",
+      "file": "prompts/10-operations-resource-efficiency/10.1-resource-efficiency-and-cost-optimisation.md",
+      "git_blob_sha": "a01c26b4209829f90d91ac76f7ef37f76104626e",
+      "optional_external_sources": [
+        "R028",
+        "R026",
+        "R031"
+      ]
+    },
+    {
+      "id": "10.2",
+      "title": "Ongoing Maintenance & Support Prompt",
+      "intent": "Maintain applications through health checks, incidents, diagnostic history, security, dependency vulnerability and unused-package reviews, recovery, updates and costs. Check post-launch search, analytics and monitoring; verify authorised repairs.",
+      "file": "prompts/10-operations-resource-efficiency/10.2-ongoing-maintenance-and-support.md",
+      "git_blob_sha": "a6459797403a987925062351375d17fb27a0b614",
+      "optional_external_sources": [
+        "R021",
+        "R002",
+        "R031",
+        "R005",
+        "R029"
+      ]
+    },
+    {
+      "id": "11.1",
+      "title": "Graphic Design, Brand Visuals & Editable Creative Assets Prompt",
+      "intent": "Own graphic design, visual identity applications and editable social assets, including composition, typography, multi-slide consistency, exact text, print/export checks and delivery QA.",
+      "file": "prompts/11-creative-production/11.1-graphic-design-brand-visuals-and-editable-creative-assets.md",
+      "git_blob_sha": "1a43f621c4d4bf8d5712c6196201fd8733531d48",
+      "optional_external_sources": [
+        "R018",
+        "R020",
+        "R016",
+        "R026"
+      ]
+    },
+    {
+      "id": "11.2",
+      "title": "Video, Motion & Product Film Production Prompt",
+      "intent": "Own non-UGC video, product demos, launch films and motion asset production, including treatment, storyboard, motion graphics, compositing, editing, sound, captions, exports and deliverable QA.",
+      "file": "prompts/11-creative-production/11.2-video-motion-and-product-film-production.md",
+      "git_blob_sha": "d520f319ad37b3a9ab8f3c1bcf4e1c921d36babc",
+      "optional_external_sources": [
+        "R013",
+        "R014",
+        "R023",
+        "R026",
+        "R022"
+      ]
+    },
+    {
+      "id": "12.1",
+      "title": "Workflow Automation & Cross-App Orchestration Prompt",
+      "intent": "Own persistent cross-application workflow automation and integration operations, including triggers, multi-app authorisation, mapping, idempotent retries, schedules, alerts and operational handover.",
+      "file": "prompts/12-automation-connected-workflows/12.1-workflow-automation-and-cross-app-orchestration.md",
+      "git_blob_sha": "8c1d3fe0258e9407b1cebd068bd7f4554e7baf06",
+      "optional_external_sources": [
+        "R031",
+        "R028",
+        "R021"
+      ]
+    }
+  ]
+}

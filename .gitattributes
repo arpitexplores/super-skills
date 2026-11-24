@@ -1,0 +1,2 @@
+# Preserve release bytes across Git checkouts on different operating systems.
+* -text
