@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Optional external research references; not bundled, installed, endorsed or guaranteed available.",
-  "date": "2026-11-22",
+  "date": "2026-11-26",
   "sources": [
     {
       "id": "R001",
@@ -59,7 +59,7 @@
       "mapped_workflows": "4.2, 9.1, 9.3, 9.4, 10.2",
       "additional_capability": "Platform security configuration assessment",
       "must_not_replace": "Not generic identity or tenant security",
-      "licence_status": "Not verified",
+      "licence_status": "MIT root confirmed at reviewed commit; preserve notices if reusing source",
       "reviewed_commit": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
       "runtime": "Verify availability, permissions and current licence when needed."
     },
@@ -350,6 +350,54 @@
       "licence_status": "Community MIT; packages/ee and enterprise API code proprietary; app/third-party terms apply",
       "reviewed_commit": "1d55703eead20072c6497beb51898ee081d5fb8f",
       "runtime": "Verify availability, permissions and current licence when needed."
+    },
+    {
+      "id": "R032",
+      "name": "Agentic SEO Skill",
+      "url": "https://github.com/Bhanunamikaze/Agentic-SEO-Skill",
+      "role": "Conditional technical SEO evidence specialist; not a default dependency",
+      "mapped_workflows": "7.1, 7.2, 8.17",
+      "additional_capability": "Selected batch crawl/index eligibility, facet/orphan/duplicate analysis, content decay and evidence helpers when ordinary tools are insufficient",
+      "must_not_replace": "Complete SEO workflow or standing requirements; inspect selected script and permissions before use; no automatic install, invocation, writes or scores as proof. Prefer ordinary tools and avoid duplicating R029.",
+      "licence_status": "MIT root names Bhanu Namikaze and agricidaniel; verify file-level rights before reuse; no source copied",
+      "reviewed_commit": "445c46c268d947fac25c4b57d38aaf723129fe62",
+      "runtime": "Selected source portions reviewed. Verify runtime, permissions and current licence when needed."
+    },
+    {
+      "id": "R034",
+      "name": "Supabase Agent Skills",
+      "url": "https://github.com/supabase/agent-skills",
+      "role": "Conditional PostgreSQL engineering specialist",
+      "mapped_workflows": "4.2, 4.3, 9.4, 10.1",
+      "additional_capability": "PostgreSQL-specific connection/pooling, transaction, query plan, index, statistics, RLS and diagnostic guidance",
+      "must_not_replace": "Complete master workflow, actual workload evidence or installed version/provider contracts; no fixed tuning formulas, universal performance gains or automatic execution",
+      "licence_status": "MIT root confirmed; preserve attribution if reusing source; no source copied",
+      "reviewed_commit": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+      "runtime": "Selected relevant rules reviewed; not exhaustive or runtime verified"
+    },
+    {
+      "id": "R035",
+      "name": "Grafana Skills",
+      "url": "https://github.com/grafana/skills",
+      "role": "Conditional k6 performance-testing specialist",
+      "mapped_workflows": "5.1, 9.4, 10.1",
+      "additional_capability": "Concurrent named load scenarios, open/closed models, journey thresholds, dropped work, generator validity and hybrid browser probes",
+      "must_not_replace": "Complete QA workflow or actual acceptance evidence; no mandatory cloud runs, fixed thresholds, third-party load or unapproved spending",
+      "licence_status": "Apache-2.0 root confirmed; preserve notices if reusing source; no source copied",
+      "reviewed_commit": "8fb72a527961f05e708f53d2a0500709e12d7970",
+      "runtime": "Selected entry and references reviewed; scripts/templates and runtime not fully reviewed or tested"
+    },
+    {
+      "id": "R036",
+      "name": "Cloudflare Skills",
+      "url": "https://github.com/cloudflare/skills",
+      "role": "Conditional Cloudflare platform engineering specialist",
+      "mapped_workflows": "4.3, 9.4, 10.1",
+      "additional_capability": "Workers runtime and configuration, streaming, bindings, queue limits, durable workflows and per-entity coordination",
+      "must_not_replace": "Complete infrastructure/backend workflow or current provider/account-specific limits; no automatic provisioning, invocation, paid service or dependency",
+      "licence_status": "Apache-2.0 root confirmed; preserve notices if reusing source; no source copied",
+      "reviewed_commit": "ff191de7d903788eceaf516a514ae7d3b56b924a",
+      "runtime": "Selected Workers and Durable Objects entry/references reviewed; not exhaustive or runtime verified"
     }
   ]
 }

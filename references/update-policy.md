@@ -18,8 +18,12 @@ The updater fetches the named tag and main from the approved origin, rejects a t
 
 If prompt bodies or pins change, obtain specific approval after reviewing the diff before rerunning with `--allow-prompt-changes`. Do not use that flag to ignore other errors. If the local tree is dirty, contains unexpected files, has an incompatible identity or fails validation, report and stop. Never stash, reset, bypass the checks, repoint the origin or install a duplicate to force success.
 
-## Rollback
+## Checkout failure and rollback
+
+A failure during a checkout change exits nonzero. The report includes the starting and intended commits, observed HEAD, Git worktree status and the two recovery refs. An observation can be unknown, and a recovery ref can be missing. Preserve the checkout and refs for review. The updater performs no automatic retry or rollback.
 
 After an explicit request and explanation of the target, run `python3 -B scripts/update_super_skills.py --rollback`. This checks the saved previous and last-update refs, validates the prior package and refuses if the current checkout is no longer the recorded clean updated commit. It does not restore unrelated files or undo external actions.
 
-A copied or ZIP installation cannot use this Git updater. Follow the staged replacement/rollback procedure in README.md. A client without local execution access must report that it cannot perform an update. Do not claim platform compatibility solely from source or unit tests.
+Rollback also validates the current package before reset. Unreadable or invalid package data can block rollback even when HEAD is clean and the recovery refs exist. If access can be safely restored, reassess before requesting another rollback. Otherwise preserve the checkout and refs for separately authorised recovery.
+
+Use the Git updater for a Git-backed installation. For a copied or ZIP installation, use the staged replacement and full-folder restoration procedure in README.md. A client without local execution access must report that it cannot perform an update. Do not claim platform compatibility solely from source or unit tests.

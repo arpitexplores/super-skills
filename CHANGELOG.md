@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.0
+
+- Expands SEO and AI discovery evidence, workload capacity and recovery guidance, AI application and agent engineering, and security and asynchronous interface acceptance.
+- Updates route intent, supporting references and optional specialist guidance. Retains 53 workflows and the existing public catalogue format.
+- Reports observed checkout state and recovery references after an update or rollback failure. Preserves explicit approvals and installed-code validation.
+
 ## 2.0.0
 
 - Replaces the active standalone collection with one Super Skills coordinator.

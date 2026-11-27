@@ -25,6 +25,9 @@ COMMIT = re.compile(r"[a-f0-9]{40}")
 class UpdateRefused(Exception):
     pass
 
+class CheckoutFailure(UpdateRefused):
+    """A checkout operation failed after mutation may have started."""
+
 def require(ok, message):
     if not ok:
         raise UpdateRefused(message)
@@ -40,6 +43,38 @@ def git(root, *args, check=True):
 
 def output(root,*args):
     return git(root,*args).stdout.decode("utf-8","strict").strip()
+
+def observe(root, *args):
+    try:
+        result = git(root, *args, check=False)
+        if result.returncode == 0 and not result.stderr:
+            return result.stdout.decode("utf-8", "strict").strip()
+    except (OSError, UnicodeError):
+        pass
+    return None
+
+def observed_ref(root, ref):
+    listing = observe(root, "for-each-ref", "--format=%(refname) %(objectname)", ref)
+    if listing is None:
+        return "unknown"
+    for line in listing.splitlines():
+        name, _, oid = line.partition(" ")
+        if name == ref:
+            return oid if COMMIT.fullmatch(oid) else "unknown"
+    return "missing"
+
+def checkout_failure(root, action, start, target, error):
+    head = observe(root, "rev-parse", "--verify", "HEAD") or "unknown"
+    status = observe(root, "--no-optional-locks", "status", "--porcelain=v1",
+                     "--untracked-files=all", "--ignored")
+    worktree = "unknown" if status is None else ("dirty" if status else "clean")
+    previous = observed_ref(root, PREVIOUS)
+    last = observed_ref(root, LAST)
+    return CheckoutFailure(
+        f"{action}: {error}\n"
+        f"Starting commit: {start}\nIntended commit: {target}\nObserved HEAD: {head}\n"
+        f"Worktree: {worktree}\n{PREVIOUS}: {previous}\n{LAST}: {last}"
+    )
 
 def trusted_remote(url):
     if url in (f"git@github.com:{TRUSTED_REPOSITORY}", f"git@github.com:{TRUSTED_REPOSITORY}.git",
@@ -123,11 +158,14 @@ def perform(root, apply=False, tag=None, commit=None, allow_prompt_changes=False
     require(old_report["pins"]==report["pins"] or allow_prompt_changes,"Workflow pins changed; separate approval required")
     again,_=preflight(root)
     require(again==old,"Checkout changed during preflight")
-    git(root,"update-ref",PREVIOUS,old)
-    git(root,"merge","--ff-only","--no-edit",target)
-    git(root,"update-ref",LAST,target)
-    now,actual=preflight(root)
-    require(now==target and actual["version"]==report["version"],"Post-update verification failed; previous commit retained")
+    try:
+        git(root,"update-ref",PREVIOUS,old)
+        git(root,"merge","--ff-only","--no-edit",target)
+        git(root,"update-ref",LAST,target)
+        now,actual=preflight(root)
+        require(now==target and actual["version"]==report["version"],"Post-update verification failed")
+    except (UpdateRefused, OSError, ValueError) as error:
+        raise checkout_failure(root, "Update", old, target, error) from error
     print("UPDATED:",old,"->",target)
     print("VALIDATED:",actual["route_count"],"workflows; no newly fetched scripts executed")
     return 0
@@ -141,9 +179,12 @@ def rollback(root):
     verified_tree(root,previous)
     again,_=preflight(root)
     require(again==current,"Checkout changed during rollback preflight")
-    git(root,"reset","--hard",previous)
-    actual,_=preflight(root)
-    require(actual==previous,"Rollback verification failed")
+    try:
+        git(root,"reset","--hard",previous)
+        actual,_=preflight(root)
+        require(actual==previous,"Rollback verification failed")
+    except (UpdateRefused, OSError, ValueError) as error:
+        raise checkout_failure(root, "Rollback", current, previous, error) from error
     print("ROLLED BACK:",current,"->",previous)
     return 0
 
@@ -162,6 +203,9 @@ def main():
             require(not args.tag and not args.commit and not args.allow_prompt_changes,"Rollback does not accept update arguments")
             return rollback(root)
         return perform(root,args.apply,args.tag,args.commit,args.allow_prompt_changes)
+    except CheckoutFailure as e:
+        print("FAILED:",str(e),file=sys.stderr)
+        return 2
     except (UpdateRefused, OSError, ValueError, UnicodeError) as e:
         print("REFUSED:",str(e),file=sys.stderr)
         return 2

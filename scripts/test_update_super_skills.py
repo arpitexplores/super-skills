@@ -1,7 +1,10 @@
 """Offline Git and package acceptance tests. Writes only disposable test fixtures."""
+from contextlib import redirect_stderr, redirect_stdout
+from io import StringIO
 import json
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -100,12 +103,115 @@ class UpdateTest(unittest.TestCase):
     def assert_unchanged(self):
         self.assertEqual(cmd(self.checkout,"rev-parse","HEAD"),self.first)
 
+    def run_cli(self, *args):
+        stdout, stderr = StringIO(), StringIO()
+        script = self.checkout / "scripts" / "update_super_skills.py"
+        with patch.object(updater, "__file__", str(script)), patch.object(sys, "argv", [str(script), *args]), \
+                redirect_stdout(stdout), redirect_stderr(stderr):
+            return updater.main(), stdout.getvalue(), stderr.getvalue()
+
+    def assert_failed_checkout(self, result, cause, start, intended, observed, worktree, *, previous, last):
+        code, stdout, stderr = result
+        self.assertEqual(code, 2)
+        self.assertNotIn("UPDATED:", stdout)
+        self.assertNotIn("ROLLED BACK:", stdout)
+        self.assertEqual(stderr.splitlines(), [
+            f"FAILED: {cause}", f"Starting commit: {start}", f"Intended commit: {intended}",
+            f"Observed HEAD: {observed}", f"Worktree: {worktree}",
+            f"{updater.PREVIOUS}: {previous}", f"{updater.LAST}: {last}",
+        ])
+
     def test_apply_and_rollback(self):
-        target=self.publish()
+        def replace_validator():
+            (self.src / "scripts" / "validate_super_skills.py").write_text("raise SystemExit(41)\n")
+        target=self.publish(replace_validator)
         self.assertEqual(updater.perform(self.checkout,True,"v2.0.1",target),0)
         self.assertEqual(cmd(self.checkout,"rev-parse","HEAD"),target)
         self.assertEqual(updater.rollback(self.checkout),0)
         self.assert_unchanged()
+
+    def test_post_update_validation_failure_and_recovery_preflight(self):
+        target = self.publish()
+        read_local = integrity.read_local
+
+        def invalid_read(root):
+            files = read_local(root)
+            if files["VERSION"].strip() == b"2.0.1":
+                files["README.md"] += b"invalid package read"
+            return files
+
+        with patch.object(integrity, "read_local", invalid_read):
+            result = self.run_cli("--apply", "--tag", "v2.0.1", "--commit", target)
+            self.assert_failed_checkout(
+                result, "Update: Local package validation failed: Package hash mismatch: README.md",
+                self.first, target, target, "clean", previous=self.first, last=target,
+            )
+            code, _, stderr = self.run_cli("--rollback")
+            self.assertEqual(code, 2)
+            self.assertTrue(stderr.startswith("REFUSED: Local package validation failed: "))
+            self.assertEqual(cmd(self.checkout, "rev-parse", "HEAD"), target)
+        self.assertEqual(updater.rollback(self.checkout), 0)
+        self.assert_unchanged()
+
+    def test_last_update_reference_failure_after_merge(self):
+        target = self.publish()
+        git = updater.git
+
+        def fail_last_ref(root, *args, **kwargs):
+            if args[:2] == ("update-ref", updater.LAST):
+                raise updater.UpdateRefused("fixture last-update write failed")
+            return git(root, *args, **kwargs)
+
+        with patch.object(updater, "git", fail_last_ref):
+            result = self.run_cli("--apply", "--tag", "v2.0.1", "--commit", target)
+        self.assert_failed_checkout(
+            result, "Update: fixture last-update write failed",
+            self.first, target, target, "clean", previous=self.first, last="missing",
+        )
+        self.assertEqual(cmd(self.checkout, "rev-parse", "HEAD"), target)
+
+    def test_failure_after_rollback_reset(self):
+        target = self.publish()
+        self.assertEqual(updater.perform(self.checkout, True, "v2.0.1", target), 0)
+        git = updater.git
+
+        def edit_after_reset(root, *args, **kwargs):
+            result = git(root, *args, **kwargs)
+            if args[0] == "reset":
+                (root / "README.md").write_text("fixture local change")
+            return result
+
+        with patch.object(updater, "git", edit_after_reset):
+            result = self.run_cli("--rollback")
+        self.assert_failed_checkout(
+            result, "Rollback: Local changes or untracked files exist",
+            target, self.first, self.first, "dirty", previous=self.first, last=target,
+        )
+        self.assert_unchanged()
+        self.assertEqual((self.checkout / "README.md").read_text(), "fixture local change")
+
+    def test_unavailable_checkout_inspection(self):
+        target = self.publish()
+        git = updater.git
+
+        def fail_inspection(root, *args, **kwargs):
+            if args[0] == "merge":
+                git(root, *args, **kwargs)
+                raise OSError("fixture failure after merge")
+            if args == ("rev-parse", "--verify", "HEAD") or args[:2] == ("--no-optional-locks", "status"):
+                raise PermissionError("fixture checkout inspection denied")
+            if args[0] == "for-each-ref" and args[-1] == updater.PREVIOUS:
+                return subprocess.CompletedProcess(args, 0, b"", b"fixture reference read warning")
+            return git(root, *args, **kwargs)
+
+        with patch.object(updater, "git", fail_inspection):
+            result = self.run_cli("--apply", "--tag", "v2.0.1", "--commit", target)
+        self.assert_failed_checkout(
+            result, "Update: fixture failure after merge",
+            self.first, target, "unknown", "unknown", previous="unknown", last="missing",
+        )
+        self.assertEqual(cmd(self.checkout, "rev-parse", "HEAD"), target)
+        self.assertEqual(cmd(self.checkout, "rev-parse", updater.PREVIOUS), self.first)
 
     def test_check_only(self):
         self.publish()

@@ -1,6 +1,6 @@
 # Optional specialist selection and legacy migration policy
 
-The complete selected `prompts/` workflow is the **primary owner** of the task. Super Skills is a self-contained coordinator with no legacy package dependency. External skills and tools are optional additions, not its replacements. `references/specialist-sources.json` is a source-reviewed **snapshot of 29 external research entries**, not an installed skill inventory, a commitment to run their code or a live list of supported provider features.
+The complete selected `prompts/` workflow is the **primary owner** of the task. Super Skills is a self-contained coordinator with no legacy package dependency. External skills and tools are optional additions, not its replacements. `references/specialist-sources.json` is a source-reviewed **snapshot of 33 external research entries**, not an installed skill inventory, a commitment to run their code or a live list of supported provider features.
 
 ## Retained marketing, design and SEO guidance
 
@@ -52,7 +52,10 @@ Approval to inspect, recommend or use an already installed specialist is **not**
 | Actual browser/interaction checks | R002 Chrome DevTools MCP, when connected |
 | Current web implementation patterns | R003 Modern Web Guidance, official docs |
 | Cloudflare platform security | R005 Cloudflare Security Audit |
-| Deep technical SEO | R029 Claude SEO, when its required tools exist |
+| Deep technical SEO | R029 Claude SEO or R032 Agentic SEO Skill for scoped evidence work |
+| PostgreSQL engineering | R034 Supabase Agent Skills for relevant workload and database diagnostics |
+| Mixed-workload performance testing | R035 Grafana Skills when authorised local tools and evidence are available |
+| Cloudflare application infrastructure | R036 Cloudflare Skills for relevant platform and runtime constraints |
 | Selected marketing, CRO or copy methods | R008 MarketingSkills, R020 Social Media Skills |
 | Social account publication | R019 Upload Post API, only with approved connection and current platform support |
 | Graphic art direction | R018 World Class Graphic Director, **licence not cleared for copying** |
