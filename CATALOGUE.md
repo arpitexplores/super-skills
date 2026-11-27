@@ -1,8 +1,8 @@
 # Super Skills workflow catalogue
 
-53 independently usable workflows in 12 categories. Select the requested outcome, then read the complete corresponding local file. IDs identify responsibilities, not a mandatory sequence.
+Browse complete workflows by the outcome you want to achieve. Each workflow can be used independently. Workflow IDs identify responsibilities, not a mandatory sequence.
 
-## 01 Client engagement commercial
+## 01 Client engagement and commercial
 
 * **1.1 Client Discovery & Project Scoping Prompt** [Workflow](prompts/01-client-engagement-commercial/1.1-client-discovery-and-project-scoping.md)
 * **1.2 Project Proposal, Estimation & Statement of Work Prompt** [Workflow](prompts/01-client-engagement-commercial/1.2-project-proposal-estimation-and-statement-of-work.md)
@@ -10,18 +10,18 @@
 * **1.4 Client Onboarding & Project Kickoff Prompt** [Workflow](prompts/01-client-engagement-commercial/1.4-client-onboarding-and-project-kickoff.md)
 * **1.5 Project Delivery & Change Management Prompt** [Workflow](prompts/01-client-engagement-commercial/1.5-project-delivery-and-change-management.md)
 
-## 02 Product planning architecture
+## 02 Product planning and architecture
 
 * **2.1 AI Product Development Prompt** [Workflow](prompts/02-product-planning-architecture/2.1-ai-product-development.md)
 * **2.2 Product Discovery, Market Validation & Monetisation Strategy Prompt** [Workflow](prompts/02-product-planning-architecture/2.2-product-discovery-market-validation-and-monetisation-strategy.md)
 * **2.3 Product Analytics, User Activation & Retention Optimisation Prompt** [Workflow](prompts/02-product-planning-architecture/2.3-product-analytics-user-activation-and-retention-optimisation.md)
 
-## 03 Ui ux design
+## 03 UI, UX and design
 
 * **3.1 UI, UX & Design Engineering Prompt** [Workflow](prompts/03-ui-ux-design/3.1-ui-ux-and-design-engineering.md)
 * **3.2 Visual Preference Discovery & Design System Creation Prompt** [Workflow](prompts/03-ui-ux-design/3.2-visual-preference-discovery-and-design-system-creation.md)
 
-## 04 Engineering ai agents
+## 04 Engineering and AI agents
 
 * **4.1 AI Agent Engineering Prompt** [Workflow](prompts/04-engineering-ai-agents/4.1-ai-agent-engineering.md)
 * **4.2 Security & Authentication Engineering Prompt** [Workflow](prompts/04-engineering-ai-agents/4.2-security-and-authentication-engineering.md)
@@ -32,21 +32,21 @@
 * **4.7 Data Engineering, Analytics Pipelines & BI Prompt** [Workflow](prompts/04-engineering-ai-agents/4.7-data-engineering-analytics-pipelines-and-bi.md)
 * **4.8 LLM Evaluation, Quality & AI Operations Prompt** [Workflow](prompts/04-engineering-ai-agents/4.8-llm-evaluation-quality-and-ai-operations.md)
 
-## 05 Testing quality assurance
+## 05 Testing and quality assurance
 
 * **5.1 Project Testing and Quality Assurance Prompt** [Workflow](prompts/05-testing-quality-assurance/5.1-project-testing-and-quality-assurance.md)
 
-## 06 Content documentation
+## 06 Content and documentation
 
 * **6.1 Content and Documentation Governance Prompt** [Workflow](prompts/06-content-documentation/6.1-content-and-documentation-governance.md)
 * **6.2 Transactional & Marketing Email Communications, Compliance & Lifecycle Engineering Prompt** [Workflow](prompts/06-content-documentation/6.2-transactional-and-marketing-email-communications-compliance-and-lifecycle-engineering.md)
 
-## 07 Seo search visibility
+## 07 SEO and search visibility
 
 * **7.1 SEO and AEO Audit Prompt** [Workflow](prompts/07-seo-search-visibility/7.1-seo-and-aeo-audit.md)
 * **7.2 SEO and AEO Implementation Prompt** [Workflow](prompts/07-seo-search-visibility/7.2-seo-and-aeo-implementation.md)
 
-## 08 Marketing growth
+## 08 Marketing and growth
 
 * **8.1 Reddit Growth, Research & Community Engagement Prompt** [Workflow](prompts/08-marketing-growth/8.1-reddit-growth-research-and-community-engagement.md)
 * **8.2 Reddit Paid Advertising & Campaign Optimisation Prompt** [Workflow](prompts/08-marketing-growth/8.2-reddit-paid-advertising-and-campaign-optimisation.md)
@@ -70,14 +70,14 @@
 * **8.20 Cross-Platform Social Content & Repurposing Prompt** [Workflow](prompts/08-marketing-growth/8.20-cross-platform-social-content-and-repurposing.md)
 * **8.21 Social Publishing & Distribution Operations Prompt** [Workflow](prompts/08-marketing-growth/8.21-social-publishing-and-distribution-operations.md)
 
-## 09 Deployment client handover
+## 09 Deployment and client handover
 
 * **9.1 Production Launch Readiness & Deployment Prompt** [Workflow](prompts/09-deployment-client-handover/9.1-production-launch-readiness-and-deployment.md)
 * **9.2 Client Handover & Operational Readiness Prompt** [Workflow](prompts/09-deployment-client-handover/9.2-client-handover-and-operational-readiness.md)
 * **9.3 Website Domain, DNS & Email Architecture Strategy Prompt** [Workflow](prompts/09-deployment-client-handover/9.3-website-domain-dns-and-email-architecture-strategy.md)
 * **9.4 Cloud Infrastructure & DevOps Engineering Prompt** [Workflow](prompts/09-deployment-client-handover/9.4-cloud-infrastructure-and-devops-engineering.md)
 
-## 10 Operations resource efficiency
+## 10 Operations and resource efficiency
 
 * **10.1 Resource Efficiency and Cost Optimisation Prompt** [Workflow](prompts/10-operations-resource-efficiency/10.1-resource-efficiency-and-cost-optimisation.md)
 * **10.2 Ongoing Maintenance & Support Prompt** [Workflow](prompts/10-operations-resource-efficiency/10.2-ongoing-maintenance-and-support.md)
@@ -87,6 +87,6 @@
 * **11.1 Graphic Design, Brand Visuals & Editable Creative Assets Prompt** [Workflow](prompts/11-creative-production/11.1-graphic-design-brand-visuals-and-editable-creative-assets.md)
 * **11.2 Video, Motion & Product Film Production Prompt** [Workflow](prompts/11-creative-production/11.2-video-motion-and-product-film-production.md)
 
-## 12 Automation connected workflows
+## 12 Automation and connected workflows
 
 * **12.1 Workflow Automation & Cross-App Orchestration Prompt** [Workflow](prompts/12-automation-connected-workflows/12.1-workflow-automation-and-cross-app-orchestration.md)

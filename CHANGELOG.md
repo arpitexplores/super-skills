@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.1
+
+- Refreshes public documentation with clearer capability descriptions, installation guidance and workflow catalogue headings.
+- Keeps public descriptions independent of workflow counts and separates product guidance from migration and compatibility information.
+- No workflow, routing, updater or permission changes.
+
 ## 2.1.0
 
 - Expands SEO and AI discovery evidence, workload capacity and recovery guidance, AI application and agent engineering, and security and asynchronous interface acceptance.

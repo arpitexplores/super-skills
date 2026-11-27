@@ -3,7 +3,7 @@ name: super-skills
 description: "Default coordinator for meaningful client, product, website, app, backend, UX, AI, data, security, testing, documentation, SEO, marketing, creative, cloud, operations and automation outcomes covered by this skill. Use for one or more meaningful deliverables, even when the request is brief. Request length alone is not a reason to skip this skill. Select and read the full matching workflow before optional specialists. Also use for requests to update, check or roll back the installed Super Skills skill. Respect explicitly selected other skills and skip small unrelated requests."
 license: MIT
 metadata:
-  version: "2.1.0"
+  version: "2.1.1"
 ---
 
 # Super Skills

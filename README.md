@@ -2,9 +2,22 @@
 
 ![Licence: MIT](https://img.shields.io/badge/licence-MIT-green) ![Release](https://img.shields.io/github/v/release/arpitexplores/super-skills)
 
-One open source Agent Skill for AI coding, design, SEO and business workflows. Install once and use **53 complete workflows across 12 categories** instead of managing dozens of separate skills.
+**One skill. Complete workflows. Practical guidance across your projects.**
 
-Super Skills selects the workflow that matches your task, reads its full instructions and applies them to your project. It covers product planning, UI/UX, full-stack development, security, AI agents, data, testing, documentation, SEO and AEO, marketing, deployment, creative production and automation.
+Super Skills is an open source Agent Skill for AI coding, product development, design, AI search visibility, marketing and business operations. Install it once rather than managing separate skills for every task.
+
+Describe what you want to accomplish. Super Skills is designed to select the relevant complete workflow and apply its instructions to your project, from planning and research through implementation, testing and optimisation.
+
+## What you can do
+
+- Build websites, SaaS products, full stack applications and reliable APIs.
+- Plan products, validate ideas and design user experiences.
+- Develop AI applications, agents, RAG systems and data pipelines.
+- Improve SEO, AEO, content, marketing campaigns and growth strategies.
+- Review security, accessibility, performance and release readiness.
+- Manage cloud infrastructure, costs, creative production and automation.
+
+The core skill works with the tools your agent already has. No additional skills, subscriptions or connected accounts are required to use the included guidance. Optional integrations depend on the task and your available tools.
 
 [Install](#installation) · [Example requests](#example-requests) · [Updates and rollback](#updates-and-rollback) · [Workflow catalogue](CATALOGUE.md) · [Release history](CHANGELOG.md)
 
@@ -12,7 +25,7 @@ Super Skills selects the workflow that matches your task, reads its full instruc
 
 Ask your AI agent:
 
-> Install Super Skills from https://github.com/arpitexplores/super-skills. Confirm the latest stable release tag and exact commit, verify the package and supported skills directory, and ask before installing or replacing anything. Install the complete folder as super-skills and verify discovery in a fresh session. Do not install additional tools or remove other skills.
+> Install Super Skills from https://github.com/arpitexplores/super-skills using the latest stable release. Confirm its exact tag and commit, verify the complete package and my agent's skills directory, and ask before installing or replacing anything. Install the complete folder as super-skills and verify discovery in a fresh session. Do not install additional tools or remove other skills.
 
 The core skill needs no extra dependencies or connected accounts. Python and Git are optional maintenance tools.
 
@@ -29,7 +42,7 @@ Describe the outcome naturally, or explicitly select the skill when your agent s
 
 ## Installation
 
-Use a reviewed [stable release](https://github.com/arpitexplores/super-skills/releases), not a moving branch. Keep the complete folder together, named `super-skills`.
+Download the [latest stable release](https://github.com/arpitexplores/super-skills/releases/latest) for the recommended installation. Keep the complete folder together, named `super-skills`. The steps below explain how to verify and register it with your agent.
 
 | Agent | User level | Project level |
 | --- | --- | --- |
@@ -42,7 +55,7 @@ See the official [Codex](https://developers.openai.com/api/reference/cli) and [A
 
 1. Choose a stable release tag and confirm its exact commit.
 2. Download its source ZIP and extract it in a fresh folder.
-3. Review the contents, manifest and all 53 workflow files. If Python 3.9+ is available, run `python3 -B scripts/validate_super_skills.py --json` from the extracted folder. Stop on mismatch. The manifest checks consistency, not publisher identity.
+3. Review the contents, manifest and complete workflow files. If Python 3.9+ is available, run `python3 -B scripts/validate_super_skills.py --json` from the extracted folder. Stop on mismatch. The manifest checks consistency, not publisher identity.
 4. Check existing registrations. With approval, copy the entire folder into the chosen discovery location under the name `super-skills`. Do not merge or overwrite existing folders.
 5. Start a fresh session and test natural selection and explicit invocation.
 
@@ -52,11 +65,13 @@ For the optional updater, use a new checkout of the official public repository. 
 
 ## Compatibility and troubleshooting
 
-Sampled discovery and routing tests were performed in Codex and Antigravity Desktop. Independent Antigravity SEO execution and native picker interaction remain unverified. Other skill-compatible agents may work but have not been verified.
+Super Skills uses the portable Agent Skills format. Installation guidance is available for Codex and Antigravity. Discovery and sampled workflow selection were tested in Codex for v2.1.0; earlier releases included sampled Antigravity discovery and routing checks. Client support, available tools and selection behaviour can vary. See the [release notes](https://github.com/arpitexplores/super-skills/releases) for version-specific compatibility details.
 
-Use `$super-skills` in Codex or `/super-skills` in Antigravity where supported. Check the actual selected skill and complete workflow files read. Existing coordinator preferences and competing specialists can affect automatic selection. Change conflicting instructions only with approval, then retest automatic selection and an unrelated question.
+Start a new session and describe your task naturally. You can also use `$super-skills` in Codex or `/super-skills` in Antigravity where supported. If selection differs from what you expect, check the active skills directory and any competing project instructions. Change conflicting preferences only with approval, then retest natural selection and an unrelated question.
 
-Version 2.0.0 consolidates the earlier standalone collection. No older skill is required, but not every historical tool, dataset or integration has been replaced or independently tested. Keep older installations until the replacement is verified and coverage and retirement are separately approved. Do not remove unrelated skills.
+### Upgrading from standalone skills
+
+The complete workflows are included in one package; earlier standalone skills are not required. If migrating from an older installation, check any additional tools or integrations you rely on before retiring it. Keep a verified recovery copy and obtain separate approval before removing older or unrelated skills. See the [v2.0.0 release history](https://github.com/arpitexplores/super-skills/releases/tag/v2.0.0) for consolidation details.
 
 ## Updates and rollback
 
@@ -76,7 +91,7 @@ For security issues, use private repository security reporting if enabled or a v
 
 ## Licence and acknowledgements
 
-Released under [MIT](LICENSE) for material the project is entitled to license. The maintainer has confirmed redistribution rights or necessary permissions for the included workflow and supporting texts, including those developed using supplied research guides. This is not independent legal certification.
+Super Skills is released under the [MIT licence](LICENSE). The maintainer has confirmed redistribution rights or necessary permissions for the included workflow and supporting texts, including those developed using supplied research guides. This confirmation is not independent legal certification.
 
 The package contains original workflow texts, coordinator, supporting guidance and standard-library Python helpers, not historical standalone repositories, third-party modules, scripts, design datasets, assets, fonts, models or provider SDKs.
 
