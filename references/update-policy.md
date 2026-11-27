@@ -8,15 +8,25 @@ Only the direct official public repository `arpitexplores/super-skills` on GitHu
 
 Checks the installed identity, full package manifest, prompt hashes and clean checkout without network access. A successful check is not proof that a newer release exists.
 
+## Preview a release before asking for approval
+
+For a general update request, check the official public latest stable release. If the user requested a specific release, check that release. Verify the `vX.Y.Z` tag and its exact peeled commit, then run:
+
+`python3 -B scripts/update_super_skills.py --preview --tag <stable-tag> --commit <40-character-commit>`
+
+Preview validates the installed checkout and fetches into a temporary bare repository. It leaves the installed worktree and its Git refs intact. Review the release diff and listed workflow changes, then present a short summary. Ask once for approval of the exact tag and commit and explicit approval of any listed pin changes. Keep routine command output in the technical receipt.
+
+Older updater versions lack `--preview`. For those versions, compare the verified target to the installed commit in an isolated public checkout. Keep `--apply` for the authorised update.
+
 ## Apply an explicitly approved release
 
-Inspect the public releases, choose a stable tag in the form `vX.Y.Z` and verify its exact peeled commit. Present the source, tag, commit and any material changes. After approval, use:
+After approval, run:
 
 `python3 -B scripts/update_super_skills.py --apply --tag <approved-tag> --commit <approved-40-character-commit>`
 
 The updater fetches the named tag and main from the approved origin, rejects a tag/commit mismatch, requires a fast-forward to a commit on public main, checks the complete package with the installed validation code, and refuses a downgrade or unexpected prompt changes. It records the prior good commit and checks the resulting tree. It does not execute newly fetched scripts. No private authentication, arbitrary remote/branch or background schedule is required.
 
-If prompt bodies or pins change, obtain specific approval after reviewing the diff before rerunning with `--allow-prompt-changes`. Do not use that flag to ignore other errors. If the local tree is dirty, contains unexpected files, has an incompatible identity or fails validation, report and stop. Never stash, reset, bypass the checks, repoint the origin or install a duplicate to force success.
+Add `--allow-prompt-changes` only when the user explicitly approved the reviewed pin changes. A refusal still requires investigation before any further apply. If the local tree is dirty, contains unexpected files, has an incompatible identity or fails validation, report and stop. Never stash, reset, bypass the checks, repoint the origin or install a duplicate to force success.
 
 ## Checkout failure and rollback
 

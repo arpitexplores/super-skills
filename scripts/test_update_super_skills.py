@@ -193,12 +193,16 @@ class UpdateTest(unittest.TestCase):
     def test_unavailable_checkout_inspection(self):
         target = self.publish()
         git = updater.git
+        merge_attempted = False
 
         def fail_inspection(root, *args, **kwargs):
+            nonlocal merge_attempted
             if args[0] == "merge":
                 git(root, *args, **kwargs)
+                merge_attempted = True
                 raise OSError("fixture failure after merge")
-            if args == ("rev-parse", "--verify", "HEAD") or args[:2] == ("--no-optional-locks", "status"):
+            if merge_attempted and (args == ("rev-parse", "--verify", "HEAD")
+                                    or args[:2] == ("--no-optional-locks", "status")):
                 raise PermissionError("fixture checkout inspection denied")
             if args[0] == "for-each-ref" and args[-1] == updater.PREVIOUS:
                 return subprocess.CompletedProcess(args, 0, b"", b"fixture reference read warning")
@@ -217,6 +221,35 @@ class UpdateTest(unittest.TestCase):
         self.publish()
         self.assertEqual(updater.perform(self.checkout),0)
         self.assert_unchanged()
+
+    def checkout_state(self):
+        return {str(path.relative_to(self.checkout)): path.read_bytes()
+                for path in self.checkout.rglob("*") if path.is_file()}
+
+    def test_preview_without_pin_changes_does_not_apply(self):
+        def replace_validator():
+            (self.src / "scripts" / "validate_super_skills.py").write_text("raise SystemExit(41)\n")
+
+        target = self.publish(replace_validator)
+        before = self.checkout_state()
+        code, stdout, stderr = self.run_cli("--preview", "--tag", "v2.0.1", "--commit", target)
+        self.assertEqual((code, stderr), (0, ""))
+        self.assertIn("Target release: v2.0.1 " + target, stdout)
+        self.assertIn("Changed workflow pins: 0", stdout)
+        self.assertIn("PREVIEW ONLY", stdout)
+        self.assertEqual(self.checkout_state(), before)
+
+    def test_preview_reports_pin_changes_and_refuses_wrong_commit(self):
+        target = self.publish(self.change_workflow_pin)
+        before = self.checkout_state()
+        code, stdout, stderr = self.run_cli("--preview", "--tag", "v2.0.1", "--commit", target)
+        self.assertEqual((code, stderr), (0, ""))
+        self.assertIn("Changed workflow pins: 1", stdout)
+        self.assertIn("prompts/01-client-engagement-commercial/1.1-", stdout)
+        code, _, stderr = self.run_cli("--preview", "--tag", "v2.0.1", "--commit", self.first)
+        self.assertEqual(code, 2)
+        self.assertIn("Release tag does not match", stderr)
+        self.assertEqual(self.checkout_state(), before)
 
     def test_wrong_commit(self):
         self.publish()
@@ -246,16 +279,17 @@ class UpdateTest(unittest.TestCase):
             updater.perform(self.checkout,True,"v2.0.1",target)
         self.assert_unchanged()
 
+    def change_workflow_pin(self):
+        routes_path = self.src / "references/routes.json"
+        routes = json.loads(routes_path.read_text())
+        item = routes["prompts"][0]
+        target = self.src / item["file"]
+        target.write_bytes(target.read_bytes() + b"\nApproved fixture change.\n")
+        item["git_blob_sha"] = integrity.blob_sha(target.read_bytes())
+        routes_path.write_text(json.dumps(routes, indent=2))
+
     def test_pin_change_requires_approval(self):
-        def change():
-            p=self.src/"references/routes.json"
-            routes=json.loads(p.read_text())
-            item=routes["prompts"][0]
-            target=self.src/item["file"]
-            target.write_bytes(target.read_bytes()+b"\nApproved fixture change.\n")
-            item["git_blob_sha"]=integrity.blob_sha(target.read_bytes())
-            p.write_text(json.dumps(routes,indent=2))
-        target=self.publish(change)
+        target=self.publish(self.change_workflow_pin)
         with self.assertRaisesRegex(updater.UpdateRefused,"pins changed"):
             updater.perform(self.checkout,True,"v2.0.1",target)
         self.assert_unchanged()

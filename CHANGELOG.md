@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.0
+
+- Adds a Git update preview that verifies the proposed release and lists workflow pin changes without touching the installed checkout or its Git refs.
+- Brings exact release and workflow pin approvals into one request. Existing installation, integrity and rollback checks remain in place.
+
 ## 2.1.1
 
 - Refreshes public documentation with clearer capability descriptions, installation guidance and workflow catalogue headings.

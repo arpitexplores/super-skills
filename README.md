@@ -75,7 +75,7 @@ The complete workflows are included in one package; earlier standalone skills ar
 
 ## Updates and rollback
 
-For Git installations, the optional updater needs Git and Python 3.9+. It defaults to a local check and never updates automatically. See the [update policy](references/update-policy.md) for exact tag and commit updates, refusal cases and rollback. Changed workflow pins require separate approval.
+For Git installations, the optional updater needs Git and Python 3.9+. It defaults to a local check and never updates automatically. Use `--preview` with a verified release tag and commit to review changes before requesting approval. If workflow pins change, ask for explicit approval of the release and the pin changes in the same request. See the [update policy](references/update-policy.md) for the commands, refusal cases and rollback.
 
 For ZIP or copied installations, verify a staged replacement first and preserve the prior complete folder outside discovery. Restore it if the update fails. Never merge versions or discard user modifications.
 

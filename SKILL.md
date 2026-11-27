@@ -3,7 +3,7 @@ name: super-skills
 description: "Default coordinator for meaningful client, product, website, app, backend, UX, AI, data, security, testing, documentation, SEO, marketing, creative, cloud, operations and automation outcomes covered by this skill. Use for one or more meaningful deliverables, even when the request is brief. Request length alone is not a reason to skip this skill. Select and read the full matching workflow before optional specialists. Also use for requests to update, check or roll back the installed Super Skills skill. Respect explicitly selected other skills and skip small unrelated requests."
 license: MIT
 metadata:
-  version: "2.1.1"
+  version: "2.2.0"
 ---
 
 # Super Skills
@@ -29,7 +29,7 @@ Resolve these paths relative to the directory containing this `SKILL.md`, **not*
 
 A request to update, check or roll back Super Skills is skill maintenance, not a business workflow. Read `references/update-policy.md` and the installation and update sections of `README.md`. Locate the existing registration rather than changing the current project. Never install a duplicate.
 
-Use only the official public repository and a reviewed release tag and exact commit. Check the current installation first. For an expressly authorised Git update, use the guarded updater with the approved tag and commit; do not update silently or follow an arbitrary source. For a ZIP or copied installation use a staged verified replacement with recoverable previous contents. Stop on any refusal; never stash, discard work, rewrite the origin or approve changed prompt pins automatically. If tools or permissions are missing, disclose that limitation. There is no automatic updater or schedule.
+Use only the official public repository and verify its latest stable release tag and exact commit for a general update request. Respect a specifically requested release. Check the current installation first. For Git, use `--preview` to review the target, then request approval for the exact release and explicit approval for any changed workflow pins in one message. Run `--apply` only after approval. For a ZIP or copied installation use a staged verified replacement with recoverable previous contents. Stop on any refusal; never stash, discard work, rewrite the origin or approve changed prompt pins automatically. If tools or permissions are missing, disclose that limitation. There is no automatic updater or schedule.
 
 ## Independent execution
 

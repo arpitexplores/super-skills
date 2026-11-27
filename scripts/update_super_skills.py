@@ -10,6 +10,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from urllib.parse import urlsplit
 import validate_super_skills as integrity
 
@@ -116,7 +117,8 @@ def preflight(root):
     require(output(root,"symbolic-ref","--quiet","--short","HEAD")==TRUSTED_BRANCH,"Expected local main branch")
     require(trusted_remote(output(root,"config","--local","--get","remote.origin.url")) and
             trusted_remote(output(root,"remote","get-url","origin")),"Origin is not the approved public repository")
-    require(not output(root,"status","--porcelain=v1","--untracked-files=all"),"Local changes or untracked files exist")
+    require(not output(root,"--no-optional-locks","status","--porcelain=v1","--untracked-files=all"),
+            "Local changes or untracked files exist")
     old=output(root,"rev-parse","HEAD")
     try:
         local=integrity.read_local(root)
@@ -132,17 +134,10 @@ def ancestor(root,a,b):
 def numeric_version(v):
     return tuple(int(x) for x in v.split("-")[0].split("."))
 
-def perform(root, apply=False, tag=None, commit=None, allow_prompt_changes=False):
-    root=root.resolve()
-    old,old_report=preflight(root)
-    print("Installed version:",old_report["version"],old)
-    if not apply:
-        require(not tag and not commit and not allow_prompt_changes,"Update arguments require --apply")
-        print("CHECK ONLY: local integrity passed; no remote lookup or change")
-        return 0
+def fetch_candidate(root, remote, old, old_version, tag, commit):
     require(isinstance(tag,str) and TAG.fullmatch(tag) and isinstance(commit,str) and COMMIT.fullmatch(commit),
-            "Supply an approved stable tag and exact 40-character commit")
-    git(root,"fetch","--no-tags","--no-recurse-submodules","origin",
+            "Supply a stable tag and exact 40-character commit")
+    git(root,"fetch","--no-tags","--no-recurse-submodules",remote,
         "+refs/heads/main:"+MAIN, "+refs/tags/"+tag+":"+FETCHED)
     target=output(root,"rev-parse",FETCHED+"^{commit}")
     require(target==commit,"Release tag does not match the approved commit")
@@ -150,11 +145,48 @@ def perform(root, apply=False, tag=None, commit=None, allow_prompt_changes=False
     require(ancestor(root,old,target),"Upstream is not a fast-forward descendant")
     report=verified_tree(root,target)
     require(report["version"]==tag[1:],"Release version and tag disagree")
+    if old!=target:
+        require(numeric_version(report["version"])>=numeric_version(old_version),"Downgrade requires recorded rollback")
+        require(report["version"]!=old_version,"Same version points to a different commit")
+    return target,report
+
+def preview(root, tag, commit):
+    old,old_report=preflight(root)
+    remote=output(root,"remote","get-url","origin")
+    with TemporaryDirectory(prefix="super-skills-preview-") as directory:
+        staging=Path(directory)
+        git(staging,"init","--bare","--quiet")
+        require(trusted_remote(output(staging,"ls-remote","--get-url",remote)),
+                "Preview origin is not the approved public repository")
+        target,report=fetch_candidate(staging,remote,old,old_report["version"],tag,commit)
+        files=output(staging,"diff","--no-ext-diff","--name-only",old,target).splitlines()
+    print("Installed version:",old_report["version"],old)
+    print("Target release:",tag,target)
     if old==target:
         print("ALREADY CURRENT")
         return 0
-    require(numeric_version(report["version"])>=numeric_version(old_report["version"]),"Downgrade requires recorded rollback")
-    require(report["version"]!=old_report["version"],"Same version points to a different commit")
+    old_pins,new_pins=old_report["pins"],report["pins"]
+    changed_pins=sorted(path for path in old_pins.keys()|new_pins.keys() if old_pins.get(path)!=new_pins.get(path))
+    print("Changed package files:",len(files))
+    print("Changed workflow pins:",len(changed_pins))
+    for path in changed_pins:
+        print(" ",path)
+    print("PREVIEW ONLY: the installation and its Git refs were not changed")
+    print("APPROVAL REQUIRED: approve the exact release and any listed workflow pin changes before applying")
+    return 0
+
+def perform(root, apply=False, tag=None, commit=None, allow_prompt_changes=False):
+    root=root.resolve()
+    old,old_report=preflight(root)
+    print("Installed version:",old_report["version"],old)
+    if not apply:
+        require(not tag and not commit and not allow_prompt_changes,"Update arguments require --preview or --apply")
+        print("CHECK ONLY: local integrity passed; no remote lookup or change")
+        return 0
+    target,report=fetch_candidate(root,"origin",old,old_report["version"],tag,commit)
+    if old==target:
+        print("ALREADY CURRENT")
+        return 0
     require(old_report["pins"]==report["pins"] or allow_prompt_changes,"Workflow pins changed; separate approval required")
     again,_=preflight(root)
     require(again==old,"Checkout changed during preflight")
@@ -191,6 +223,7 @@ def rollback(root):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     mode=parser.add_mutually_exclusive_group()
+    mode.add_argument("--preview",action="store_true")
     mode.add_argument("--apply",action="store_true")
     mode.add_argument("--rollback",action="store_true")
     parser.add_argument("--tag")
@@ -199,6 +232,9 @@ def main():
     args=parser.parse_args()
     root=Path(__file__).resolve().parent.parent
     try:
+        if args.preview:
+            require(not args.allow_prompt_changes,"--allow-prompt-changes requires --apply")
+            return preview(root,args.tag,args.commit)
         if args.rollback:
             require(not args.tag and not args.commit and not args.allow_prompt_changes,"Rollback does not accept update arguments")
             return rollback(root)
